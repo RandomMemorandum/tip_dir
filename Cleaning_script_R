@@ -1,0 +1,71 @@
+"""
+This is a basic script documenting the preliminary examination and cleaning of the data 
+that was entered into Excel by hand from information recorded in a notebook.
+
+We start by accessing the needed libraries, 
+importing the data, 
+viewing several key characteristics of the data object, 
+then cleaning and parsing parts of it to make it suitable to study. 
+"""
+
+
+# we inlcude ggplot2 for basic visualizations
+# tidyverse for use of dplyr and tidyr packages
+library(ggplot2)
+library(tidyverse)
+
+# ======== Importing data and Inspecting
+# importing .csv file into dataframe
+tips <- read_csv("Delivery_tips_R/LogJuly17Mar19.csv")
+
+# view snapshot of dataframe
+head(tips)
+
+# look at all columns
+colnames(tips)
+
+# look at data.frame sructure with str()
+# this functions tells us what classes the datatypes fall under
+# Also shows the first few entries of each column
+# followed by the types of columns and what their names are
+str(tips)
+
+# all columns are characters 
+# values need to be converted to numeric type
+
+# in order to just return the dimensions of the dataframe we can use dim_desc()
+dim_desc(tips)
+
+#reference from R for Analysts
+# here is an example that uses class() type() nrow() ncol() and names()
+# https://smott.gitbooks.io/r-for-analysts/content/3-1-basic-queries.html
+
+basic_info <- list(
+    class = class(nyc_taxi), # shows the type of the data: `data.frame`
+    type = typeof(nyc_taxi), # shows that a `data.frame` is fundamentally a `list` object
+    nrow = nrow(nyc_taxi), # number of rows
+    ncol = ncol(nyc_taxi), # number of columns
+    colnames = names(nyc_taxi))
+
+
+# ======== Cleaning
+
+
+# we start by removing all NA rows, which leaves rows for days where there is a work shift
+tips = drop_na(tips)
+
+
+# for reference
+# https://stackoverflow.com/questions/2288485/how-to-convert-a-data-frame-column-to-numeric-type
+
+# we can convert one column this way
+# new_obj <- transform(data_object, column = as.numeric(column))
+
+# transform column and convert it to numeric type
+tips = transform(tips, no_orders = as.numeric(no_orders))
+
+# to convert multiple columns, we enter each expression as an element within a c()
+tips = transform(tips, c(tips = as.numeric(tips), No_hours = as.numeric(No_hours)))
+
+
+
