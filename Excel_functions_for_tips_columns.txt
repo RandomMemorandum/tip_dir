@@ -1,0 +1,67 @@
+This document records the excel functions that are used to generate the additional columns used in the worksheet.
+
+We have entered 4 columns already:
+
+	date		date of shift, in MM/DD/YYYY format
+	shift		beginning hour and end hour of shift, like 11-4 
+	no_orders	number of separate orders delivered
+	tips		total dollar amount taken home that night
+
+
+From these we can extract additional information,
+Right away we can get the name of the month, the day of the week, and the year
+
+
+# ======== Day, Month, Year ========
+
+We do this with =TEXT()
+
+	month-column	=TEXT([date-column-cell], "mm")
+
+	year-column		=TEXT([date-column-cell], "yyyy")
+
+	day-of-week		=TEXT([date-column-cell], "ddd")
+
+
+# ======== Start time, end time, length of shift
+
+We also parse the starttime and endtime from the shift-column
+
+	start_time 		=LEFT([shift-column], SEARCH("-", [shift-column])-1)
+
+	end_time 		=TRIM( RIGHT ([shift-column],
+					    (LEN([shift-column])-
+					    SEARCH( "-", [shift-column]))))
+
+Once we have separated the starttime and endtime, we can learn the length of the shift
+
+	no_hours	  =(([end-date-column]+[end-time-column]])-
+				      ([start_date_column]+[start-time-column]))
+				      *24
+
+
+# ======== Creating 'Short North variable' ========
+
+# this column returns a 1 if the day is Monday or Wednesday, and the shift is opening
+
+	Short_north		=IF(L2=1,IF(OR([day_of_week-column]="Mon",C2="Fri"),1,0),0)
+
+
+
+# ======== Creating 'Day shift variable' ========
+
+# day_shift tells us whether the shift began before 2 PM or not
+# very few shifts would begin before 2 PM that were not opening shifts
+
+	day_shift		=IF([start_time-column] < (TIME(14,0,0)),1, 0)
+
+
+
+# ======== Creating 'Harsh_night variable' ========
+
+# this column is created in order to separate all sales and orders that occur after 4 PM. 
+# this is the time that the Donatos shift change occurs, and so, in order to make a 
+# comparison between the model and the actual sales, we use the same threshold
+	
+	harsh_night 	=IF([start_time-column] < (TIME(16,0,0)),0,1)
+
