@@ -1,0 +1,65 @@
+This document explains what each column stands for within the project.
+
+Some columns simply describe a number, like tips, for tips earned that day; 
+while other columns are calculated fields based on other columns such as no_hours, 
+for the length of the shift in hours, which is simply the end time minus the start time.
+
+Several variables here are boolean, that are created for the sake of filtering the data based on certain characteristics.
+
+
+
+date
+
+shift
+
+no_orders
+
+tips
+
+day_of_week
+
+month
+
+year
+
+beginning_of_shift
+
+end_of_shift
+
+shift_length
+
+short_north
+
+shift_opening
+
+shift_harsh_day
+
+shift_harsh_night
+
+tips_adjusted
+
+home_game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
