@@ -1,0 +1,30 @@
+
+I.  Intro
+
+  A. Myself
+    1. Ohio State University
+    2. Donatos job
+  B. Donatos as a company
+
+
+II. Details on data
+  
+  A. Excel stage
+    1. 4 columns written on paper
+    2. creating additional columns
+    3. formatting each column
+
+III. Exploration
+
+  A. basic graphs
+    1. histograms
+    2. scatter plots
+    3. pairplots
+  
+  B. Relevant means, groups
+
+
+IV. Analysis
+
+  A. Notable comparisons between days of the week
+  B. comparisons between seasons
